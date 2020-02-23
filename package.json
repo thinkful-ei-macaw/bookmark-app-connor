@@ -1,0 +1,20 @@
+{
+  "name": "bookmark-app-connor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thinkful-ei-macaw/bookmark-app-connor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thinkful-ei-macaw/bookmark-app-connor/issues"
+  },
+  "homepage": "https://github.com/thinkful-ei-macaw/bookmark-app-connor#readme"
+}
