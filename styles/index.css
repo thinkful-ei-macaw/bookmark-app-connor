@@ -26,6 +26,12 @@
   align-content: center;
 }
 
+#form-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .top-nav {
   display: flex;
   flex-direction: row;

@@ -1,12 +1,9 @@
+import bookmarkList from './bookmarks-list';
+import store from './store';
+import api from './api';
+
 const main = function () {
-  api.getItems()
-    .then((items) => {
-      items.forEach((item) => store.addItem(item));
-      shoppingList.render();
-    });
-  shoppingList.bindEventListeners();
-  shoppingList.render();
-  
+  bookmarkList.render();
 };
 
 $(main);

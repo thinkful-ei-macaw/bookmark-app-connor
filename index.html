@@ -77,13 +77,14 @@
       </div class="top-nav">
       <ul class="bookmarks-list js-bookmarks-list">
         <li>
-          <button type="button"><span>Title</span>></button><button type="button" id="delete-bookmark">Delete</button>
+          <button type="button"><span>Title</span>></button>
           <p><a href="www.bookmarklink.com">Visit Link</a><span>  Star Rating</span</p>
           <p class="description">Description goes here:  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ei
             usmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
             exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in repreh
             enderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur
           </p>
+          <button type="button" id="delete-bookmark">Delete</button>
         </li>
         <li><button type="button">Bookmark item, star rating</button></li>
         <li><button type="button">Bookmark item, star rating</button></li>
@@ -109,9 +110,9 @@
     <section id="add-bookmark-view">
       <form class="add-bookmark-form">
         <label for="bookmark-link">Add New Bookmark:</label><br>
-        <input id="bookmark-link" placeholder="https://www.bookmark.com"><br>
+        <input id="bookmark-link" placeholder="https://www.bookmark.com" required><br>
         <label for="bookmark-title"></label><br>
-        <input id="bookmark-title" placeholder="Bookmark Title"><br>
+        <input id="bookmark-title" placeholder="Bookmark Title" required><br>
         <label for="select-rating"></label>
         <select id="select-rating" name="select-rating">
           <option value=" ">Filter By Rating</option>
@@ -136,7 +137,36 @@
       };
       </code>
     </section>
-    <section id="form-error"></section>
+    <section id="form-error">
+      <form class="add-bookmark-form">
+        <label for="bookmark-link">Add New Bookmark:</label><br>
+        <input id="bookmark-link" placeholder="https://www.bookmark.com"><br>
+        <label for="bookmark-title"></label><br>
+        <input id="bookmark-title" placeholder="Bookmark Title"><br>
+        <label for="select-rating"></label>
+        <select id="select-rating" name="select-rating">
+          <option value=" ">Filter By Rating</option>
+          <option value="2">1</option>
+          <option value="3">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select><br>
+        <label for="add-description"></label>
+        <input id="add-description" placeholder="Description"></input>
+        <div>error message</div>
+        <div id="add-bookmark-buttons">
+          <button type="button">Cancel</button>
+          <button type="submit">Create</button>
+        </div>
+      </form>
+      <code>const store = {
+        bookmarks: [...],
+        adding: true,
+        error: errorType,
+        filter: 0
+      };</code>
+    </section>
   </div>
 
   <!-- vendor scripts -->
