@@ -7,7 +7,7 @@
       title: 'Title 1',
       rating: 3,
       url: 'http://www.title1.com',
-      description: 'lorem ipsum dolor sit',
+      desc: 'lorem ipsum dolor sit',
       expanded: false
     },
     {
@@ -15,7 +15,7 @@
       title: 'Title 2',
       rating: 5,
       url: 'http://www.title2.com',
-      description: 'dolorum tempore deserunt',
+      desc: 'dolorum tempore deserunt',
       expanded: false
     } 
     ...
@@ -33,23 +33,44 @@ const STORE = {
       title: 'Title 1',
       rating: 3,
       url: 'http://www.title1.com',
-      description: 'lorem ipsum dolor sit',
-      expanded: false
+      desc: 'lorem ipsum dolor sit',
+      expanded: true
     },
     {
       id: '6ffw',
       title: 'Title 2',
       rating: 5,
       url: 'http://www.title2.com',
-      description: 'dolorum tempore deserunt',
+      desc: 'dolorum tempore deserunt',
       expanded: false
     } 
   ],
-  adding: false,
+  adding: true,
   error: null,
   filter: 0
 };
 
+const findById = function (id) {
+  return this.STORE.bookmarks.find(currentItem => currentItem.id === id);
+};
+
+const addItem = function (item) {
+  this.STORE.bookmarks.push(item);
+};
+
+const findAndUpdate = function(id, newData) {
+  let foundItem = this.STORE.bookmarks.find(item => item.id === id);
+  Object.assign(foundItem, newData);
+};
+
+const findAndDelete = function (id) {
+  this.STORE.bookmarks = this.STORE.bookmarks.filter(currentItem => currentItem.id !== id);
+};
+
 export default {
-  STORE
+  STORE,
+  findById,
+  addItem,
+  findAndUpdate,
+  findAndDelete
 };

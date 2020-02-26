@@ -8,11 +8,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="styles/index.css">
+  <script src="https://kit.fontawesome.com/298e60a734.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+  <h1 id="top-heading">My Bookmarks</h1>
   <div class="container">
-    <h1 id="top-heading">My Bookmarks</h1>
     <section id="initial-view">
       <div class="top-nav">
         <button type="button" id="add-bookmark-button">+ New</button>
@@ -20,11 +21,11 @@
           <label for="filter-rating"></label>
           <select id="filter-rating" name="filter-rating">
             <option value=" ">Filter By Rating</option>
-            <option value="2">> 1</option>
-            <option value="3">> 2</option>
-            <option value="3">> 3</option>
-            <option value="4">> 4</option>
-            <option value="5">> 5</option>
+            <option value="2">1</option>
+            <option value="3">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
           </select>
         </form>
       </div>
@@ -139,10 +140,10 @@
     </section>
     <section id="add-bookmark-view">
       <form class="add-bookmark-form">
-        <label for="bookmark-link">Add New Bookmark:</label><br>
-        <input id="bookmark-link" placeholder="https://www.bookmark.com" required><br>
+        <label for="bookmark-url">Add New Bookmark:</label><br>
+        <input id="bookmark-url" type="url" placeholder="https://www.bookmark.com" required><br>
         <label for="bookmark-title"></label><br>
-        <input id="bookmark-title" placeholder="Bookmark Title" required><br>
+        <input id="bookmark-title" type="text" placeholder="Bookmark Title" required><br>
         <label for="select-rating"></label>
         <select id="select-rating" name="select-rating">
           <option value=" ">Filter By Rating</option>
