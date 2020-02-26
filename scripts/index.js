@@ -1,9 +1,9 @@
-import bookmarkList from './bookmarks-list';
-import store from './store';
-import api from './api';
+import bookmarkList from './bookmarks-list.js';
+import store from './store.js';
+// import api from './api.js';
 
 const main = function () {
   bookmarkList.render();
 };
 
-$(main);
+$(main); 

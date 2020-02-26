@@ -1,6 +1,6 @@
 // import statements
-import api from './api';
-import store from './store';
+import api from './api.js';
+import store from './store.js';
 
 /** STRING GENERATORS */
 
@@ -28,6 +28,7 @@ const generateBookmarkListString = function (bookmarkList) {
 /* RENDER FUNCTION */
 function render() {
   let items = [...store.STORE.bookmarks];
+  console.log(items);
 
   const bookmarkListString = generateBookmarkListString(items);
   $('.js-bookmarks-list').html(bookmarkListString);
@@ -49,5 +50,5 @@ function render() {
 // export
 export default {
   render,
-  
-}
+
+};
