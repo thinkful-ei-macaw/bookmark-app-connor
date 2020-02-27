@@ -106,8 +106,30 @@ const generateAddBookmarkViewString = function() {
 </section>`;
 };
 
-/* RENDER FUNCTION */
+// generate error string
+const generateErrorString = function(message) {
+  return `<section class="error-content">
+  <button id="cancel-error">X</button>
+  <p>${message}</p>
+</section>`;
+};
+
+/* RENDER FUNCTIONS */
+// render error 
+const renderError = function() {
+  if (store.STORE.error) {
+    const el = generateErrorString(store.STORE.error);
+    $('.error-container').html(el);
+  } else {
+    $('.error-container').empty();
+  }
+
+};
+
+// main render function
 function render() {
+  renderError();
+
   if (store.STORE.adding === true) {
     $('#container').html(generateAddBookmarkViewString());
   } else if (store.STORE.filter > 0) {
@@ -128,6 +150,13 @@ function render() {
 
 
 /** EVENT HANDLERS */
+
+const handleCloseError = function () {
+  $('.error-container').on('click', '#cancel-error', () => {
+    store.STORE.setError(null);
+    renderError();
+  });
+};
 
 // add bookmark add button clicked
 function handleAddBookmarkClicked() {
@@ -224,6 +253,7 @@ const bindEventListeners = function () {
   handleBookmarkExpandClicked();
   handleRatingFilterChanged();
   handleBookmarkDelete();
+  handleCloseError();
 };
 
 // export
