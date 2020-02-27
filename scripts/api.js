@@ -8,7 +8,7 @@ function createItem(title, url, rating, desc){
 
   const newItem = JSON.stringify(
     {
-      id: cuid(),
+    //  id: cuid(),
       title: title,
       url: url,
       rating: rating,

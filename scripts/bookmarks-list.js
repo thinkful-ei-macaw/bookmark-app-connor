@@ -29,6 +29,31 @@ const generateBookmarkListString = bookmarkList => {
   return items.join('');
 };
 
+// generate initial view string
+const generateInitialViewString = () => {
+  let items = [...store.STORE.bookmarks];
+  const bookmarkListString = generateBookmarkListString(items);
+
+  return `<section id="initial-view">
+  <div class="top-nav">
+    <button type="button" id="add-bookmark-button">+ New</button>
+    <form class="star-filter-form">
+      <label for="filter-rating"></label>
+      <select id="filter-rating" name="filter-rating">
+        <option value=" ">Filter By Rating</option>
+        <option value="2">1</option>
+        <option value="3">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </form>
+  </div>
+  <ul class="bookmarks-list js-bookmarks-list">${bookmarkListString}
+  </ul>
+</section>`;
+};
+
 // generate add bookmark view string
 const generateAddBookmarkViewString = function() {
   return `<section id="add-bookmark-view">
@@ -53,13 +78,6 @@ const generateAddBookmarkViewString = function() {
       <button type="submit">Create</button>
     </div>
   </form>
-  <code>const store = {
-    bookmarks: [...],
-    adding: true,
-    error: null,
-    filter: 0
-  };
-  </code>
 </section>`;
 };
 
@@ -68,10 +86,8 @@ function render() {
   if (store.STORE.adding === true) {
     $('#container').html(generateAddBookmarkViewString());
   } else {
-    let items = [...store.STORE.bookmarks];
-    const bookmarkListString = generateBookmarkListString(items);
 
-    $('.js-bookmarks-list').html(bookmarkListString);
+    $('#container').html(generateInitialViewString());
   }
 }
 
@@ -82,13 +98,13 @@ function handleAddBookmarkClicked() {
   // update store to show adding = true
   $('#initial-view').on('click', '#add-bookmark-button', () => {
     store.STORE.adding = true;
+    render();
   });
-  // render
-  render();
 }
 
 // submit new bookmark form
 function handleAddBookmarkSubmit() {
+  
   // validate input for required fields
 
   // do success workflow if valid
@@ -110,7 +126,7 @@ function handleBookmarkExpandClicked() {
 
 // Filter by rating
 function handleRatingFilterChanged() {
-  // 
+  // be sure to not change what is in the store (so filter in render function)
 
   // render
   render();

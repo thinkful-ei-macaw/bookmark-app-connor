@@ -45,7 +45,7 @@ const STORE = {
       expanded: false
     } 
   ],
-  adding: true,
+  adding: false,
   error: null,
   filter: 0
 };
