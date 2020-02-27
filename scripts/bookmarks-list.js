@@ -64,7 +64,7 @@ const generateAddBookmarkViewString = function() {
     <input id="bookmark-title" type="text" placeholder="Bookmark Title" required><br>
     <label for="select-rating"></label>
     <select id="select-rating" name="select-rating">
-      <option value=" ">Filter By Rating</option>
+      <option value=" ">Choose Rating</option>
       <option value="2">1</option>
       <option value="3">2</option>
       <option value="3">3</option>
@@ -75,7 +75,7 @@ const generateAddBookmarkViewString = function() {
     <input id="add-description" placeholder="Description"></input>
     <div id="add-bookmark-buttons">
       <button type="button">Cancel</button>
-      <button type="submit">Create</button>
+      <button type="submit" id="submit-bookmark">Create</button>
     </div>
   </form>
 </section>`;
@@ -96,7 +96,7 @@ function render() {
 // add bookmark add button clicked
 function handleAddBookmarkClicked() {
   // update store to show adding = true
-  $('#initial-view').on('click', '#add-bookmark-button', () => {
+  $('#container').on('click', '#add-bookmark-button', () => {
     store.STORE.adding = true;
     render();
   });
@@ -104,7 +104,26 @@ function handleAddBookmarkClicked() {
 
 // submit new bookmark form
 function handleAddBookmarkSubmit() {
-  
+  $('#container').on('click', '#submit-bookmark', event => {
+    event.preventDefault();
+    const title = $('#bookmark-title').val();
+    $('#bookmark-title').val('');
+    const url = $('#bookmark-url').val();
+    $('#bookmark-url').val('');
+    const rating = $('#select-rating').val();
+    $('#select-rating').val('');
+    const desc = $('#add-description').val();
+    $('#add-description').val('');
+
+    api.createItem(title, url, rating, desc)
+      .then(res => res.json())
+      .then((newItem) => {
+        store.addItem(newItem);
+        render();
+      });
+    
+
+  });
   // validate input for required fields
 
   // do success workflow if valid

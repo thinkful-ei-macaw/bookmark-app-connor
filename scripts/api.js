@@ -4,7 +4,7 @@ function getItems() {
   return fetch(`${BASE_URL}/bookmarks`);
 }
 
-function createItem(title, url, rating, desc){
+function createItem(title, url, rating = 3, desc = ''){
 
   const newItem = JSON.stringify(
     {
