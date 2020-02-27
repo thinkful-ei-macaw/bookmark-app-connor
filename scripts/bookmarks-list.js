@@ -208,9 +208,13 @@ function handleRatingFilterChanged() {
 // Delete bookmark item from list
 function handleBookmarkDelete() {
   // target delete button on click, remove item
-  
-  // render
-  render();
+  $('#container').on('click', '#delete-bookmark', event => {
+    const id = getItemIdFromElement(event.currentTarget);
+    api.deleteItem(id).then(() => {
+      store.findAndDelete(id);
+      render();
+    });
+  });
 }
 
 // bundle event listener functions
