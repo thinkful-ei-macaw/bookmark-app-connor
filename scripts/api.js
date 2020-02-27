@@ -2,6 +2,8 @@ import store from './store.js';
 
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/connor';
 
+
+
 function getItems() {
   return fetch(`${BASE_URL}/bookmarks`);
 }
