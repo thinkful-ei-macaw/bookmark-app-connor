@@ -18,7 +18,7 @@ const generateBookmarkElementString = function (bookmark) {
   </li>`;
   } else {
     return `<li class="bookmark-item" data-item-id="${bookmark.id}">
-    <button type="button" class="bookmark-element"><span>${bookmark.title}</span><span>${bookmark.rating}</span>
+    <button type="button" class="bookmark-element"><span class="title-span">${bookmark.title}</span><span class="rating-span">${bookmark.rating} <i class="fas fa-star"></i></span>
     </button>
   </li>`;}
 };
@@ -83,10 +83,10 @@ const generateFilterViewString = (filterValue) => {
 const generateAddBookmarkViewString = function() {
   return `<section id="add-bookmark-view">
   <form class="add-bookmark-form">
-    <label for="bookmark-url">Add New Bookmark:</label><br>
-    <input id="bookmark-url" type="url" placeholder="https://www.bookmark.com" required><br>
-    <label for="bookmark-title"></label><br>
-    <input id="bookmark-title" type="text" placeholder="Bookmark Title" required><br>
+    <label for="bookmark-url">Add New Bookmark:</label>
+    <input id="bookmark-url" type="url" placeholder="https://www.bookmark.com" required>
+    <label for="bookmark-title"></label>
+    <input id="bookmark-title" type="text" placeholder="Bookmark Title" required>
     <label for="select-rating"></label>
     <select id="select-rating" name="select-rating">
       <option value="3">Choose Rating</option>
@@ -95,11 +95,11 @@ const generateAddBookmarkViewString = function() {
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5">5</option>
-    </select><br>
+    </select>
     <label for="add-description"></label>
     <input id="add-description" placeholder="Description"></input>
     <div id="add-bookmark-buttons">
-      <button type="button">Cancel</button>
+      <button type="button" id="cancel">Cancel</button>
       <button type="submit" id="submit-bookmark">Create</button>
     </div>
   </form>
@@ -119,16 +119,15 @@ const generateErrorString = function(message) {
 const renderError = function() {
   if (store.STORE.error) {
     const el = generateErrorString(store.STORE.error);
-    $('.error-container').html(el);
+    $('#container').append(el);
   } else {
-    $('.error-container').empty();
+    $('.error-content').empty();
   }
 
 };
 
 // main render function
 function render() {
-  renderError();
 
   if (store.STORE.adding === true) {
     $('#container').html(generateAddBookmarkViewString());
@@ -138,6 +137,8 @@ function render() {
   } else {
     $('#container').html(generateInitialViewString());
   }
+  renderError();
+
 }
 
 // function generateBookmarksString(bookmarklist, filter){
@@ -151,9 +152,16 @@ function render() {
 
 /** EVENT HANDLERS */
 
+const handleCancelClicked = function () {
+  $("#container").on('click', '#cancel', () => {
+    store.STORE.adding = false;
+    render();
+  });
+}
+
 const handleCloseError = function () {
-  $('.error-container').on('click', '#cancel-error', () => {
-    store.STORE.setError(null);
+  $('#container').on('click', '#cancel-error', () => {
+    store.setError(null);
     renderError();
   });
 };
@@ -177,18 +185,24 @@ function handleAddBookmarkSubmit() {
     // $('#bookmark-url').val('');
     const rating = parseInt($('#select-rating').val());
     // $('#select-rating').val('');
-    const desc = $('#add-description').val();
+    let desc = $('#add-description').val() || undefined;
+    // if (!desc) {
+    //   desc = undefined;
+    // }
+    
     // $('#add-description').val('');
     store.STORE.adding = false;
 
     api.createItem(title, url, rating, desc)
-      .then(res => res.json())
+      // .then(res => res.json())
       .then((newItem) => {
         store.addItem(newItem);
         render();
       })
-      .catch(error => {
-        store.setError(error);
+      .catch((error) => {
+        store.setError(error.message);
+        store.STORE.adding = true;
+        render();
       });
     
 
@@ -254,6 +268,7 @@ const bindEventListeners = function () {
   handleRatingFilterChanged();
   handleBookmarkDelete();
   handleCloseError();
+  handleCancelClicked();
 };
 
 // export

@@ -67,6 +67,8 @@ const findAndDelete = function (id) {
   this.STORE.bookmarks = this.STORE.bookmarks.filter(currentItem => currentItem.id !== id);
 };
 
+
+
 const setError = function(error) {
   this.STORE.error = error;
 };
