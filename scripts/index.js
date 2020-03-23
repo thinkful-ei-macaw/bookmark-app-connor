@@ -4,9 +4,10 @@ import api from './api.js';
 
 const main = function () {
   api.getItems()
-    .then((items) => {
-      items.forEach((item) =>  store.addItem(item));
-    });
+  .then((items) => {
+    items.forEach((item) =>  store.addItem(item));
+    bookmarkList.render();
+  });
   
   bookmarkList.bindEventListeners();
   bookmarkList.render();
